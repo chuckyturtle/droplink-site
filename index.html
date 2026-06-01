@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DropLink — Transfiere archivos entre PC y celular</title>
+<meta name="description" content="Transfiere archivos entre tu PC y celular por WiFi. Sin cables, sin apps extra, con un doble clic.">
+<meta property="og:title" content="DropLink — Transferencia de archivos local">
+<meta property="og:description" content="Sin cables. Sin apps. Solo WiFi.">
+<meta property="og:type" content="website">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:       #0c2461;
+  --blue:       #1a56db;
+  --blue-mid:   #2563eb;
+  --blue-light: #eff6ff;
+  --blue-pale:  #dbeafe;
+  --white:      #ffffff;
+  --gray-50:    #f8fafc;
+  --gray-100:   #f1f5f9;
+  --gray-200:   #e2e8f0;
+  --gray-400:   #94a3b8;
+  --gray-500:   #64748b;
+  --gray-700:   #374151;
+  --black:      #0f172a;
+  --r:          10px;
+  --shadow:     0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06);
+  --shadow-md:  0 4px 24px rgba(0,0,0,0.1);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--white);
+  color: var(--black);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ══════════════════════════════
+   NAV
+══════════════════════════════ */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--navy);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+  padding: 0 32px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 19px;
+  font-weight: 800;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.nav-logo img {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  object-fit: cover;
+}
+
+.nav-logo-drop { color: #ffffff; }
+.nav-logo-link { color: #38bdf8; }
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.7);
+  flex: 1;
+}
+.nav-links a { transition: color 0.15s; }
+.nav-links a:hover { color: #ffffff; }
+
+.nav-actions { display: flex; gap: 10px; align-items: center; margin-left: auto; }
+
+.btn-nav-ghost {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.75);
+  padding: 8px 16px;
+  border-radius: var(--r);
+  border: 1px solid rgba(255,255,255,0.2);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-decoration: none;
+}
+.btn-nav-ghost:hover { border-color: rgba(255,255,255,0.6); color: #ffffff; }
+
+.btn-nav-primary {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy);
+  background: #ffffff;
+  padding: 8px 20px;
+  border-radius: var(--r);
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  text-decoration: none;
+}
+.btn-nav-primary:hover { background: #38bdf8; color: var(--navy); }
+
+/* ══════════════════════════════
+   HERO
+══════════════════════════════ */
+#hero {
+  background: linear-gradient(135deg, var(--navy) 0%, #1e40af 60%, #1d4ed8 100%);
+  padding: 90px 32px 100px;
+  position: relative;
+  overflow: hidden;
+}
+
+#hero::before {
+  content: '';
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(59,130,246,0.3) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+#hero::after {
+  content: '';
+  position: absolute;
+  bottom: -150px; left: -100px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-sub { margin-left: auto; margin-right: auto; }
+.hero-btns { justify-content: center; }
+.hero-counter { justify-content: center; }
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 99px;
+  padding: 5px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.hero-badge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #34d399;
+  box-shadow: 0 0 8px #34d399;
+}
+
+#hero h1 {
+  font-size: clamp(32px, 4.5vw, 56px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.hero-sub {
+  font-size: 18px;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 36px;
+  line-height: 1.6;
+  max-width: 460px;
+}
+
+.hero-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: white;
+  color: var(--blue);
+  font-size: 15px;
+  font-weight: 700;
+  padding: 14px 28px;
+  border-radius: var(--r);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  transition: all 0.15s;
+}
+.btn-primary:hover { background: var(--blue-light); transform: translateY(-1px); }
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: transparent;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: var(--r);
+  border: 2px solid rgba(255,255,255,0.35);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+.btn-outline:hover { border-color: white; background: rgba(255,255,255,0.08); }
+
+.hero-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.65);
+}
+
+.hero-counter strong {
+  font-size: 15px;
+  font-weight: 700;
+  color: white;
+}
+
+
+/* ══════════════════════════════
+   STATS BAR
+══════════════════════════════ */
+#stats {
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-200);
+  padding: 28px 32px;
+}
+
+.stats-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.stat-item { text-align: center; }
+
+.stat-num {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--navy);
+  display: block;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.stat-label { font-size: 13px; color: var(--gray-500); }
+
+/* ══════════════════════════════
+   SHARED
+══════════════════════════════ */
+.section-tag {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--blue);
+  background: var(--blue-light);
+  padding: 4px 12px;
+  border-radius: 99px;
+  margin-bottom: 14px;
+}
+
+h2.section-title {
+  font-size: clamp(24px, 3.5vw, 38px);
+  font-weight: 800;
+  color: var(--black);
+  letter-spacing: -0.5px;
+  margin-bottom: 12px;
+}
+
+.section-sub {
+  font-size: 17px;
+  color: var(--gray-500);
+  max-width: 520px;
+}
+
+.container { max-width: 1100px; margin: 0 auto; }
+
+section { padding: 80px 32px; }
+
+/* ══════════════════════════════
+   FEATURES
+══════════════════════════════ */
+#features { background: var(--gray-50); }
+
+.features-header { margin-bottom: 52px; }
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.feat-card {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+  transition: all 0.2s;
+}
+.feat-card:hover {
+  border-color: var(--blue-pale);
+  box-shadow: 0 8px 30px rgba(37,99,235,0.1);
+  transform: translateY(-2px);
+}
+
+.feat-icon {
+  width: 46px; height: 46px;
+  background: var(--blue-light);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-bottom: 16px;
+}
+
+.feat-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 6px;
+}
+
+.feat-desc {
+  font-size: 13px;
+  color: var(--gray-500);
+  line-height: 1.55;
+}
+
+/* ══════════════════════════════
+   HOW TO USE
+══════════════════════════════ */
+#steps { background: var(--white); }
+
+.steps-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.steps-list { display:flex; flex-direction:column; gap:16px; }
+
+.step-card {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 20px;
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  background: var(--gray-50);
+  transition: border-color 0.2s;
+}
+.step-card:hover { border-color: var(--blue-pale); }
+
+.step-num {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: white;
+  font-weight: 800;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.step-title { font-size: 14px; font-weight: 700; color: var(--black); margin-bottom: 3px; }
+.step-desc  { font-size: 13px; color: var(--gray-500); }
+
+.steps-visual {
+  display: flex;
+  justify-content: center;
+}
+
+.phone-mockup {
+  width: 240px;
+  background: var(--white);
+  border: 2px solid var(--gray-200);
+  border-radius: 32px;
+  padding: 20px 16px;
+  box-shadow: var(--shadow-md);
+  position: relative;
+}
+
+.phone-notch {
+  width: 80px; height: 6px;
+  background: var(--gray-200);
+  border-radius: 99px;
+  margin: 0 auto 20px;
+}
+
+.phone-screen {
+  background: var(--navy);
+  border-radius: 16px;
+  padding: 16px;
+  color: white;
+}
+
+.phone-drop {
+  border: 2px dashed rgba(255,255,255,0.25);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.phone-drop-icon { font-size: 28px; margin-bottom: 6px; }
+.phone-drop-text { font-size: 11px; color: rgba(255,255,255,0.7); }
+
+.phone-file {
+  background: rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+}
+.phone-file-icon { font-size: 18px; }
+.phone-file-name { font-weight: 600; font-size: 11px; }
+.phone-file-size { color: rgba(255,255,255,0.5); font-size: 10px; }
+
+/* ══════════════════════════════
+   REQUIREMENTS
+══════════════════════════════ */
+#requirements { background: var(--gray-50); }
+
+.req-content { display:flex; gap:20px; flex-wrap:wrap; }
+
+.req-card {
+  flex: 1;
+  min-width: 260px;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: var(--shadow);
+}
+
+.req-icon {
+  width: 50px; height: 50px;
+  border-radius: 12px;
+  background: var(--blue-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  flex-shrink: 0;
+}
+
+.req-name { font-size: 16px; font-weight: 700; color: var(--black); margin-bottom: 2px; }
+.req-sub  { font-size: 13px; color: var(--gray-500); margin-bottom: 8px; }
+
+.req-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--blue);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.req-link:hover { text-decoration: underline; }
+
+/* ══════════════════════════════
+   CTA BOTTOM
+══════════════════════════════ */
+#cta {
+  background: linear-gradient(135deg, var(--navy) 0%, #1e40af 100%);
+  padding: 80px 32px;
+  text-align: center;
+}
+
+#cta h2 {
+  font-size: clamp(26px, 4vw, 42px);
+  font-weight: 800;
+  color: white;
+  letter-spacing: -0.5px;
+  margin-bottom: 12px;
+}
+
+#cta p {
+  font-size: 17px;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 36px;
+}
+
+#cta .btn-primary { box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
+
+.cta-counter {
+  margin-top: 18px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.cta-counter strong { color: rgba(255,255,255,0.85); font-weight: 600; }
+
+/* ══════════════════════════════
+   FOOTER
+══════════════════════════════ */
+footer {
+  background: var(--navy);
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding: 32px;
+  text-align: center;
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+}
+
+footer strong { color: rgba(255,255,255,0.7); }
+
+/* ══════════════════════════════
+   RESPONSIVE
+══════════════════════════════ */
+@media (max-width: 768px) {
+  nav { padding: 0 20px; gap: 12px; }
+  .nav-links { display: none; }
+  .btn-nav-ghost { display: none; }
+  #hero { padding: 60px 20px 70px; }
+  .steps-inner { grid-template-columns: 1fr; }
+  .steps-visual { display: none; }
+  .stats-inner { gap: 28px; }
+  section { padding: 60px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <a class="nav-logo" href="#">
+    <img src="logo.png" alt="DropLink logo">
+    <span><span class="nav-logo-drop">Drop</span><span class="nav-logo-link">link</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="#features">Funciones</a>
+    <a href="#steps">Cómo usarlo</a>
+    <a href="#requirements">Requisitos</a>
+  </div>
+  <div class="nav-actions">
+    <a href="#steps" class="btn-nav-ghost">Ver cómo funciona</a>
+    <a href="/api/download" class="btn-nav-primary">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Descarga gratuita
+    </a>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge"><span class="hero-badge-dot"></span>Gratuito · Sin registro · Sin límites</div>
+      <h1>Transfiere archivos entre PC y celular.</h1>
+      <p class="hero-sub">Sin cables. Sin aplicaciones extra. Solo conectate a la misma WiFi, escaneá el QR y empezá a transferir en segundos.</p>
+      <div class="hero-btns">
+        <a href="/api/download" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Descarga gratuita
+        </a>
+        <a href="#steps" class="btn-outline">Ver cómo funciona</a>
+      </div>
+      <div class="hero-counter">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        <strong id="hero-count">—</strong> personas ya lo descargaron
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ STATS ══ -->
+<section id="stats">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <span class="stat-num" id="dl-count">—</span>
+      <span class="stat-label">Descargas totales</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">100%</span>
+      <span class="stat-label">Gratuito</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">WiFi</span>
+      <span class="stat-label">Red local, sin internet</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FEATURES ══ -->
+<section id="features">
+  <div class="container">
+    <div class="features-header">
+      <div class="section-tag">Funciones</div>
+      <h2 class="section-title">Todo lo que necesitás</h2>
+      <p class="section-sub">Diseñado para ser simple, seguro y rápido. Sin configuraciones complicadas.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feat-card">
+        <div class="feat-icon">📡</div>
+        <div class="feat-title">Red local WiFi</div>
+        <div class="feat-desc">Transfiere sin internet. Todo queda dentro de tu red doméstica.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🔒</div>
+        <div class="feat-title">Acceso con PIN</div>
+        <div class="feat-desc">PIN aleatorio en cada inicio. Máximo 5 intentos antes de bloqueo automático.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">⚡</div>
+        <div class="feat-title">Doble clic y listo</div>
+        <div class="feat-desc">Sin instalación complicada. Solo Node.js y doble clic en el ícono.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">📱</div>
+        <div class="feat-title">PC y celular</div>
+        <div class="feat-desc">Enviá desde el celular al PC y viceversa. Drag & drop o tap para seleccionar.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">💬</div>
+        <div class="feat-title">Texto y URLs</div>
+        <div class="feat-desc">Compartí links, contraseñas o notas entre dispositivos al instante.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">📦</div>
+        <div class="feat-title">Sin límite de tamaño</div>
+        <div class="feat-desc">Transferí videos, backups o lo que sea. Sin restricciones de tamaño de archivo.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ HOW TO USE ══ -->
+<section id="steps">
+  <div class="container">
+    <div class="steps-inner">
+      <div>
+        <div class="section-tag">Cómo usarlo</div>
+        <h2 class="section-title">En 3 pasos simples</h2>
+        <p class="section-sub" style="margin-bottom:32px">Sin configuración técnica. Cualquier persona puede usarlo desde el primer momento.</p>
+        <div class="steps-list">
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <div>
+              <div class="step-title">Descargá y descomprimí</div>
+              <div class="step-desc">Descargá el .zip y extraelo en cualquier carpeta de tu PC.</div>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">2</div>
+            <div>
+              <div class="step-title">Doble clic en "Iniciar DropLink"</div>
+              <div class="step-desc">El servidor arranca y el navegador se abre con tu PIN y código QR.</div>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">3</div>
+            <div>
+              <div class="step-title">Escaneá el QR con el celular</div>
+              <div class="step-desc">Misma WiFi, ingresá el PIN y empezá a transferir archivos en ambas direcciones.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="steps-visual">
+        <div class="phone-mockup">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px">DropLink</div>
+            <div class="phone-drop">
+              <div class="phone-drop-icon">📁</div>
+              <div class="phone-drop-text">Toca para seleccionar archivos</div>
+            </div>
+            <div class="phone-file">
+              <div class="phone-file-icon">🖼️</div>
+              <div>
+                <div class="phone-file-name">foto_vacaciones.jpg</div>
+                <div class="phone-file-size">3.2 MB · Enviado ✓</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ REQUIREMENTS ══ -->
+<section id="requirements">
+  <div class="container">
+    <div class="section-tag">Requisitos</div>
+    <h2 class="section-title" style="margin-bottom:32px">Lo único que necesitás</h2>
+    <div class="req-content">
+      <div class="req-card">
+        <div class="req-icon">🟢</div>
+        <div>
+          <div class="req-name">Node.js</div>
+          <div class="req-sub">Versión LTS · Windows 10 o superior</div>
+          <a class="req-link" href="https://nodejs.org" target="_blank" rel="noopener">
+            Descargar gratis en nodejs.org
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="req-card">
+        <div class="req-icon">📶</div>
+        <div>
+          <div class="req-name">Red WiFi</div>
+          <div class="req-sub">PC y celular en la misma red local</div>
+          <div style="font-size:13px;color:var(--gray-400);margin-top:8px">No se necesita internet</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section id="cta">
+  <div class="container">
+    <h2>¿Listo para empezar?</h2>
+    <p>Gratis, sin registro, sin anuncios. Solo descargá y usá.</p>
+    <a href="/api/download" class="btn-primary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Descargar DropLink gratis
+    </a>
+    <div class="cta-counter">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <strong id="cta-count">—</strong> descargas realizadas
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROMO ══ -->
+<section id="promo" style="background:var(--gray-50);border-top:1px solid var(--gray-200);padding:32px;">
+  <div style="max-width:500px;margin:0 auto;text-align:center;">
+    <p style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--gray-400);margin-bottom:14px;">También del mismo equipo</p>
+    <a href="https://tradtext.net/" target="_blank" rel="noopener"
+       style="display:inline-flex;align-items:center;gap:14px;background:var(--white);border:1px solid var(--gray-200);border-radius:12px;padding:16px 24px;box-shadow:var(--shadow);text-decoration:none;transition:all 0.2s;"
+       onmouseover="this.style.borderColor='#2563eb';this.style.transform='translateY(-1px)'"
+       onmouseout="this.style.borderColor='var(--gray-200)';this.style.transform='none'">
+      <span style="font-size:26px;">🌐</span>
+      <span style="text-align:left;">
+        <span style="display:block;font-size:16px;font-weight:800;color:var(--black);">Tradtext</span>
+        <span style="font-size:12px;color:var(--gray-500);">Traduce cualquier texto en pantalla al instante</span>
+      </span>
+      <svg style="margin-left:4px;color:var(--gray-400)" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <strong>DropLink</strong> — Herramienta gratuita de transferencia de archivos local · Sin datos recopilados
+  <br><br>
+  <span style="font-size:12px;color:#ffffff;opacity:0.6">Contacto: droplinksoporte@gmail.com</span>
+</footer>
+
+<script>
+async function loadCount() {
+  try {
+    const r = await fetch('/api/count');
+    const { count } = await r.json();
+    const fmt = count.toLocaleString('es');
+    const heroEl = document.getElementById('hero-count');
+    const dlEl   = document.getElementById('dl-count');
+    const ctaEl  = document.getElementById('cta-count');
+    if (heroEl) heroEl.textContent = fmt;
+    if (dlEl)   dlEl.textContent   = fmt;
+    if (ctaEl)  ctaEl.textContent  = fmt;
+  } catch {}
+}
+loadCount();
+</script>
+</body>
+</html>
