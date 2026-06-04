@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unirse a sala DropLink P2P</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:      #0a0a12;
+  --surface: #12121e;
+  --surface2:#1c1c2e;
+  --border:  rgba(255,255,255,0.07);
+  --accent:  #6366f1;
+  --cyan:    #22d3ee;
+  --text:    #e2e8f0;
+  --text2:   #64748b;
+  --success: #10b981;
+  --radius:  16px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  width: 100%;
+  max-width: 480px;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+}
+
+.card-header {
+  padding: 24px 28px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, var(--accent), var(--cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.badge {
+  background: rgba(99,102,241,0.12);
+  border: 1px solid rgba(99,102,241,0.3);
+  color: #a5b4fc;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 99px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.card-body { padding: 28px; }
+
+.invite-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text2);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+}
+
+/* Code display */
+.code-box {
+  background: var(--surface2);
+  border: 1px solid rgba(99,102,241,0.25);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.code-value {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: var(--accent);
+  font-family: 'SF Mono', 'Cascadia Code', monospace;
+  word-break: break-all;
+  margin-bottom: 12px;
+}
+
+.btn-copy {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text2);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 20px;
+  border-radius: 8px;
+  transition: all 0.15s;
+}
+.btn-copy:hover { border-color: var(--accent); color: var(--text); }
+.btn-copy.copied { border-color: var(--success); color: var(--success); }
+
+/* Steps */
+.steps { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.step-num {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(99,102,241,0.15);
+  border: 1px solid rgba(99,102,241,0.3);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.step-text { font-size: 14px; color: var(--text); line-height: 1.4; }
+.step-text span { color: var(--text2); font-size: 12px; display: block; margin-top: 2px; }
+
+/* Download CTA */
+.download-btn {
+  display: block;
+  width: 100%;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.15s;
+  box-shadow: 0 4px 20px rgba(99,102,241,0.3);
+}
+.download-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+.already-link {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--text2);
+}
+.already-link a { color: var(--accent); text-decoration: none; }
+.already-link a:hover { text-decoration: underline; }
+
+/* Invalid state */
+#invalid-msg {
+  display: none;
+  text-align: center;
+  padding: 12px;
+  background: rgba(239,68,68,0.07);
+  border: 1px solid rgba(239,68,68,0.2);
+  border-radius: 10px;
+  font-size: 13px;
+  color: #f87171;
+  margin-bottom: 20px;
+}
+
+/* No-code state */
+#no-code { display: none; }
+#has-code { display: none; }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="card-header">
+    <div class="logo">DropLink</div>
+    <span class="badge">P2P</span>
+  </div>
+
+  <div class="card-body">
+
+    <!-- No code in URL -->
+    <div id="no-code">
+      <div class="invite-label">Transferencia P2P</div>
+      <p style="font-size:14px;color:var(--text2);margin-bottom:20px">
+        Este link no tiene un código de sala válido. Pedile a quien te invitó que te mande el link de nuevo.
+      </p>
+      <a href="https://droplink.mx" class="download-btn">Ir a droplink.mx</a>
+    </div>
+
+    <!-- Has valid code -->
+    <div id="has-code">
+      <div class="invite-label">Te invitaron a una sala P2P</div>
+
+      <div id="invalid-msg">
+        El código en este link no parece válido. Pedile uno nuevo a quien te invitó.
+      </div>
+
+      <div class="code-box">
+        <div class="code-value" id="code-display">—</div>
+        <button class="btn-copy" id="copy-btn" onclick="copyCode()">Copiar código</button>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-text">
+            Abrí <strong>DropLink</strong> en tu computadora
+            <span>Si no lo tenés instalado, descargalo abajo</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-text">
+            Andá a la pestaña <strong>P2P</strong>
+            <span>Está en el menú de la parte superior de la app</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-text">
+            En "Unirse a sala", pegá el código y hacé clic en <strong>Conectar</strong>
+            <span>El host debe aprobarte para completar la conexión</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-text">
+            ¡Listo! Los archivos van directo entre las dos PCs
+            <span>Sin servidores intermedios, 100% privado</span>
+          </div>
+        </div>
+      </div>
+
+      <a href="https://droplink.mx" class="download-btn" id="download-btn">
+        Descargar DropLink gratis
+      </a>
+      <div class="already-link">
+        ¿Ya lo tenés instalado? <a href="#" onclick="copyCode();return false">Copiá el código</a> y pegalo en la app
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const params = new URLSearchParams(location.search);
+const code   = (params.get('c') || '').trim().toUpperCase();
+
+if (!code) {
+  document.getElementById('no-code').style.display = 'block';
+} else {
+  document.getElementById('has-code').style.display = 'block';
+  if (/^[A-Z0-9]{18}$/.test(code)) {
+    // Format as groups of 6 for readability: ABCDEF · GHIJMN · PQRSTU
+    const fmt = code.match(/.{1,6}/g).join('  ·  ');
+    document.getElementById('code-display').textContent = fmt;
+  } else {
+    document.getElementById('invalid-msg').style.display = 'block';
+    document.getElementById('code-display').textContent = code;
+  }
+}
+
+function copyCode() {
+  navigator.clipboard.writeText(code).then(() => {
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = '✓ Copiado';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copiar código';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+</script>
+</body>
+</html>
