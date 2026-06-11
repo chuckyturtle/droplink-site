@@ -936,6 +936,17 @@ footer strong { color: rgba(255,255,255,0.7); }
   </div>
 </nav>
 
+<!-- ══ UPDATE BAR ══ -->
+<div id="update-bar" style="background:linear-gradient(90deg,#1a3a5c,#1e4d8c,#1a3a5c);border-bottom:1px solid rgba(137,170,204,0.25);padding:10px 24px;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;text-align:center">
+  <span style="font-size:13px;color:rgba(255,255,255,0.9);display:flex;align-items:center;gap:8px">
+    <span style="background:linear-gradient(90deg,#89aacc,#4e85bf);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:800;font-size:14px">🚀 v1.2.0</span>
+    <span style="color:rgba(255,255,255,0.7)">—</span>
+    <span>Nueva versión disponible · Compartir por enlace, nube 24h y planes Pro</span>
+  </span>
+  <a href="/api/download" style="background:linear-gradient(90deg,#89aacc,#4e85bf);color:#05070b;font-size:12px;font-weight:800;padding:6px 16px;border-radius:99px;text-decoration:none;white-space:nowrap;flex-shrink:0;transition:filter .15s" onmouseover="this.style.filter='brightness(1.1)'" onmouseout="this.style.filter=''">Descargar actualización →</a>
+  <button onclick="this.parentElement.style.display='none'" style="background:none;border:none;color:rgba(255,255,255,0.35);cursor:pointer;font-size:18px;line-height:1;padding:0 4px;flex-shrink:0" title="Cerrar">×</button>
+</div>
+
 <!-- ══ HERO ══ -->
 <section id="hero">
   <div class="hero-inner">
@@ -990,6 +1001,53 @@ footer strong { color: rgba(255,255,255,0.7); }
   </div>
 </section>
 
+<!-- ══ PRO ══ -->
+<section id="pro">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:48px">
+      <div class="pro-eyebrow" style="display:inline-flex">★ DropLink Pro</div>
+      <h2 style="margin-top:16px">Lleva DropLink al<br><span>siguiente nivel</span></h2>
+      <p class="pro-sub" style="margin:14px auto 0;text-align:center">Comparte archivos por enlace, sube a la nube por 24 h y personaliza tu página de descarga con tu marca. Sin keys — se activa automáticamente al pagar.</p>
+    </div>
+
+    <div class="pro-grid">
+      <div class="pro-plan">
+        <div class="pro-plan-name">Mensual</div>
+        <div>
+          <div class="pro-plan-price"><sup>$</sup>3.99</div>
+          <div class="pro-plan-period">por mes</div>
+        </div>
+        <div class="pro-plan-desc">Ideal para probar todas las funciones Pro sin compromiso a largo plazo.</div>
+        <button class="btn-pro-buy ghost" onclick="openProCheckout('1mo')">Obtener Pro mensual</button>
+      </div>
+      <div class="pro-plan featured">
+        <div class="pro-plan-badge">Más popular</div>
+        <div class="pro-plan-name">Trimestral</div>
+        <div>
+          <div class="pro-plan-price"><sup>$</sup>9.99</div>
+          <div class="pro-plan-period">cada 3 meses · <strong style="color:#89aacc">ahorra 16%</strong></div>
+        </div>
+        <div class="pro-plan-desc">El balance perfecto entre precio y duración. El plan favorito de nuestros usuarios.</div>
+        <button class="btn-pro-buy" onclick="openProCheckout('3mo')">Obtener Pro trimestral</button>
+      </div>
+      <div class="pro-plan">
+        <div class="pro-plan-name">Anual</div>
+        <div>
+          <div class="pro-plan-price"><sup>$</sup>34.99</div>
+          <div class="pro-plan-period">por año · <strong style="color:#89aacc">ahorra 27%</strong></div>
+        </div>
+        <div class="pro-plan-desc">El mayor ahorro. Paga una vez y olvidate por todo el año.</div>
+        <button class="btn-pro-buy ghost" onclick="openProCheckout('1yr')">Obtener Pro anual</button>
+      </div>
+    </div>
+
+    <p class="pro-note">
+      ¿Ya tienes Pro? Abre DropLink en tu PC — se detecta automáticamente.<br>
+      ¿Reinstalaste en otra PC? Usa "Restaurar acceso Pro" en la app con tu email de compra.
+    </p>
+  </div>
+</section>
+
 <!-- ══ FEATURES ══ -->
 <section id="features">
   <div class="container">
@@ -1028,6 +1086,30 @@ footer strong { color: rgba(255,255,255,0.7); }
         <div class="feat-icon">📦</div>
         <div class="feat-title">Sin límite de tamaño</div>
         <div class="feat-desc">Transferí videos, backups o lo que sea. Sin restricciones de tamaño de archivo.</div>
+      </div>
+      <div class="feat-card" style="border-color:rgba(78,133,191,0.35);background:linear-gradient(135deg,#f0f6ff,#fff)">
+        <div class="feat-icon" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe)">🔗</div>
+        <div style="display:flex;align-items:center;gap:7px;margin-bottom:6px">
+          <span class="feat-title" style="margin-bottom:0">Compartir por enlace</span>
+          <span style="font-size:9px;font-weight:800;background:linear-gradient(90deg,#3b82f6,#1d4ed8);color:#fff;padding:2px 7px;border-radius:99px;letter-spacing:.05em">PRO</span>
+        </div>
+        <div class="feat-desc">Genera un link de descarga que cualquiera puede abrir desde su celular o PC, sin estar en tu misma red.</div>
+      </div>
+      <div class="feat-card" style="border-color:rgba(78,133,191,0.35);background:linear-gradient(135deg,#f0f6ff,#fff)">
+        <div class="feat-icon" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe)">☁️</div>
+        <div style="display:flex;align-items:center;gap:7px;margin-bottom:6px">
+          <span class="feat-title" style="margin-bottom:0">Nube 24 horas</span>
+          <span style="font-size:9px;font-weight:800;background:linear-gradient(90deg,#3b82f6,#1d4ed8);color:#fff;padding:2px 7px;border-radius:99px;letter-spacing:.05em">PRO</span>
+        </div>
+        <div class="feat-desc">Sube archivos directo a la nube. Disponibles 24 h desde cualquier dispositivo con el enlace.</div>
+      </div>
+      <div class="feat-card" style="border-color:rgba(78,133,191,0.35);background:linear-gradient(135deg,#f0f6ff,#fff)">
+        <div class="feat-icon" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe)">🎨</div>
+        <div style="display:flex;align-items:center;gap:7px;margin-bottom:6px">
+          <span class="feat-title" style="margin-bottom:0">Página con tu marca</span>
+          <span style="font-size:9px;font-weight:800;background:linear-gradient(90deg,#3b82f6,#1d4ed8);color:#fff;padding:2px 7px;border-radius:99px;letter-spacing:.05em">PRO</span>
+        </div>
+        <div class="feat-desc">Personaliza el fondo, fuente y colores de tu página de descarga con tu logo y paleta de marca.</div>
       </div>
     </div>
   </div>
@@ -1115,89 +1197,6 @@ footer strong { color: rgba(255,255,255,0.7); }
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ══ PRO ══ -->
-<section id="pro">
-  <div class="container">
-    <div class="pro-eyebrow">★ DropLink Pro</div>
-    <h2>Lleva DropLink al<br><span>siguiente nivel</span></h2>
-    <p class="pro-sub">Comparte archivos por enlace, sube a la nube por 24 horas y personaliza tu página de descarga con tu marca. Sin keys, sin configuración — se activa automáticamente al pagar.</p>
-
-    <div class="pro-grid">
-
-      <!-- Plan 1 mes -->
-      <div class="pro-plan">
-        <div class="pro-plan-name">Mensual</div>
-        <div>
-          <div class="pro-plan-price"><sup>$</sup>3.99</div>
-          <div class="pro-plan-period">por mes</div>
-        </div>
-        <div class="pro-plan-desc">Ideal para probar todas las funciones Pro sin compromiso a largo plazo.</div>
-        <button class="btn-pro-buy ghost" onclick="openProCheckout('1mo')">Obtener Pro mensual</button>
-      </div>
-
-      <!-- Plan 3 meses -->
-      <div class="pro-plan featured">
-        <div class="pro-plan-badge">Más popular</div>
-        <div class="pro-plan-name">Trimestral</div>
-        <div>
-          <div class="pro-plan-price"><sup>$</sup>9.99</div>
-          <div class="pro-plan-period">cada 3 meses · <strong style="color:#4e85bf">ahorra 16%</strong></div>
-        </div>
-        <div class="pro-plan-desc">El balance perfecto entre precio y duración. El plan favorito de nuestros usuarios.</div>
-        <button class="btn-pro-buy" onclick="openProCheckout('3mo')">Obtener Pro trimestral</button>
-      </div>
-
-      <!-- Plan 1 año -->
-      <div class="pro-plan">
-        <div class="pro-plan-name">Anual</div>
-        <div>
-          <div class="pro-plan-price"><sup>$</sup>34.99</div>
-          <div class="pro-plan-period">por año · <strong style="color:#4e85bf">ahorra 27%</strong></div>
-        </div>
-        <div class="pro-plan-desc">El mayor ahorro. Paga una vez y olvidate por todo el año.</div>
-        <button class="btn-pro-buy ghost" onclick="openProCheckout('1yr')">Obtener Pro anual</button>
-      </div>
-
-    </div>
-
-    <div class="pro-features">
-      <div class="pro-feat">
-        <div class="pro-feat-icon">🔗</div>
-        <div>
-          <div class="pro-feat-title">Compartir por enlace</div>
-          <div class="pro-feat-desc">Genera un link de descarga que cualquiera puede usar desde su celular o PC, sin estar en tu misma red.</div>
-        </div>
-      </div>
-      <div class="pro-feat">
-        <div class="pro-feat-icon">☁️</div>
-        <div>
-          <div class="pro-feat-title">Nube 24 horas</div>
-          <div class="pro-feat-desc">Sube archivos directamente a la nube. Disponibles 24 horas desde cualquier dispositivo con el enlace.</div>
-        </div>
-      </div>
-      <div class="pro-feat">
-        <div class="pro-feat-icon">🎨</div>
-        <div>
-          <div class="pro-feat-title">Página de descarga con tu marca</div>
-          <div class="pro-feat-desc">Personaliza el fondo, la fuente y los colores de tu página de descarga con tu logo y paleta.</div>
-        </div>
-      </div>
-      <div class="pro-feat">
-        <div class="pro-feat-icon">⚡</div>
-        <div>
-          <div class="pro-feat-title">Activación automática</div>
-          <div class="pro-feat-desc">Pagas y la app se desbloquea sola en segundos. Sin keys, sin correos, sin pasos extra.</div>
-        </div>
-      </div>
-    </div>
-
-    <p class="pro-note">
-      ¿Ya tienes Pro? Abre DropLink en tu PC — se detecta automáticamente.<br>
-      ¿Reinstalaste en otra PC? Usa "Restaurar acceso Pro" en la app con tu email de compra.
-    </p>
   </div>
 </section>
 
