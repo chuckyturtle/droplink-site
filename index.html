@@ -926,9 +926,185 @@ img.emoji {
   transition: color 0.15s;
 }
 .btn-modal-cancel:hover { color: rgba(255,255,255,0.65); }
+
+/* ══════════════════════════════
+   MOTION & ANIMATIONS
+══════════════════════════════ */
+
+/* ── Scroll progress bar ── */
+#scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #38bdf8, #2563eb);
+  transform-origin: left;
+  transform: scaleX(0);
+  z-index: 200;
+  pointer-events: none;
+}
+
+/* ── Hero entrance (staggered) ── */
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-badge, #hero h1, .hero-sub, .hero-btns, .hero-counter {
+  opacity: 0;
+  animation: heroFadeUp 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.hero-badge   { animation-delay: 0.05s; }
+#hero h1      { animation-delay: 0.18s; }
+.hero-sub     { animation-delay: 0.32s; }
+.hero-btns    { animation-delay: 0.46s; }
+.hero-counter { animation-delay: 0.6s; }
+
+/* ── Hero background blobs floating ── */
+@keyframes blobDriftA {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(-70px, 50px) scale(1.18); }
+}
+@keyframes blobDriftB {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(60px, -40px) scale(1.12); }
+}
+#hero::before { animation: blobDriftA 14s ease-in-out infinite alternate; }
+#hero::after  { animation: blobDriftB 18s ease-in-out infinite alternate; }
+
+/* ── Badge dot pulse ── */
+@keyframes dotPulse {
+  0%, 100% { box-shadow: 0 0 8px #34d399; }
+  50%      { box-shadow: 0 0 16px #34d399, 0 0 28px rgba(52,211,153,0.5); }
+}
+.hero-badge-dot { animation: dotPulse 2.2s ease-in-out infinite; }
+
+/* ── Nav: glass on scroll + animated underline ── */
+nav { transition: background 0.3s, box-shadow 0.3s, backdrop-filter 0.3s; }
+nav.scrolled {
+  background: rgba(12, 36, 97, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 6px 28px rgba(0,0,0,0.4);
+}
+.nav-links a { position: relative; }
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -5px;
+  width: 100%; height: 2px;
+  background: #38bdf8;
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nav-links a:hover::after { transform: scaleX(1); }
+
+/* ── Update bar: entrance + gradient drift ── */
+@keyframes barSlideDown {
+  from { opacity: 0; transform: translateY(-100%); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes barGradientShift {
+  0%   { background-position: 0% 0; }
+  100% { background-position: 200% 0; }
+}
+#update-bar {
+  background-size: 200% 100% !important;
+  animation: barSlideDown 0.6s cubic-bezier(0.22, 1, 0.36, 1) both,
+             barGradientShift 9s linear infinite;
+}
+
+/* ── Scroll reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ── Feature cards: icon micro-interaction ── */
+.feat-icon { transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.feat-card:hover .feat-icon { transform: scale(1.14) rotate(-5deg); }
+
+/* ── Step cards: slide + number pop ── */
+.step-card { transition: border-color 0.2s, transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s; }
+.step-card:hover { transform: translateX(8px); box-shadow: var(--shadow); }
+.step-num { transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s; }
+.step-card:hover .step-num { transform: scale(1.18); box-shadow: 0 4px 14px rgba(26,86,219,0.45); }
+
+/* ── Requirement cards lift ── */
+.req-card { transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s, border-color 0.28s; }
+.req-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--blue-pale);
+  box-shadow: 0 10px 32px rgba(37,99,235,0.12);
+}
+.req-icon { transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.req-card:hover .req-icon { transform: scale(1.12) rotate(4deg); }
+
+/* ── Phone mockup: gentle float ── */
+@keyframes phoneFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-14px); }
+}
+.phone-mockup { animation: phoneFloat 6s ease-in-out infinite; }
+
+/* ── Button shine sweep ── */
+.btn-primary, .btn-pro-buy, .btn-nav-primary {
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary::after, .btn-pro-buy::after, .btn-nav-primary::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -80%;
+  width: 50%; height: 100%;
+  background: linear-gradient(105deg, transparent, rgba(255,255,255,0.6), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.55s ease;
+  pointer-events: none;
+}
+.btn-primary:hover::after, .btn-pro-buy:hover::after, .btn-nav-primary:hover::after { left: 130%; }
+
+/* ── Featured plan: breathing glow ── */
+@keyframes featuredGlow {
+  0%, 100% { box-shadow: 0 8px 32px rgba(78,133,191,0.15); }
+  50%      { box-shadow: 0 10px 52px rgba(78,133,191,0.38); }
+}
+.pro-plan.featured { animation: featuredGlow 4.5s ease-in-out infinite; }
+
+/* ── Pro plan badge shimmer ── */
+@keyframes badgeShimmer {
+  0%   { background-position: -100% 0; }
+  100% { background-position: 200% 0; }
+}
+.pro-plan-badge {
+  background: linear-gradient(90deg, #89aacc, #c4d7ea, #4e85bf, #89aacc);
+  background-size: 250% 100%;
+  animation: badgeShimmer 4s linear infinite;
+}
+
+/* ── Stat numbers entrance handled by reveal; subtle hover ── */
+.stat-item { transition: transform 0.25s; }
+.stat-item:hover { transform: translateY(-2px); }
+
+/* ── Reduced motion: respect user preference ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+  .hero-badge, #hero h1, .hero-sub, .hero-btns, .hero-counter { opacity: 1; animation: none; }
+}
 </style>
 </head>
 <body>
+
+<div id="scroll-progress"></div>
 
 <!-- ══ NAV ══ -->
 <nav>
@@ -1288,20 +1464,75 @@ document.getElementById('pro-modal-overlay').addEventListener('click', e => {
     document.getElementById('pro-modal-overlay').classList.remove('open');
 });
 
+function animateCount(el, target) {
+  const dur = 1500, t0 = performance.now();
+  function tick(t) {
+    const p = Math.min((t - t0) / dur, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(target * eased).toLocaleString('es');
+    if (p < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
 async function loadCount() {
   try {
     const r = await fetch('/api/count');
     const { count } = await r.json();
-    const fmt = count.toLocaleString('es');
-    const heroEl = document.getElementById('hero-count');
-    const dlEl   = document.getElementById('dl-count');
-    const ctaEl  = document.getElementById('cta-count');
-    if (heroEl) heroEl.textContent = fmt;
-    if (dlEl)   dlEl.textContent   = fmt;
-    if (ctaEl)  ctaEl.textContent  = fmt;
+    [ 'hero-count', 'dl-count', 'cta-count' ].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { animateCount(el, count); io.unobserve(el); }
+        });
+      }, { threshold: 0.4 });
+      io.observe(el);
+    });
   } catch {}
 }
 loadCount();
+
+// ── Scroll progress bar ──
+const progressBar = document.getElementById('scroll-progress');
+const navBar = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  progressBar.style.transform = `scaleX(${max > 0 ? window.scrollY / max : 0})`;
+  navBar.classList.toggle('scrolled', window.scrollY > 12);
+}, { passive: true });
+
+// ── Scroll reveal ──
+const revealEls = document.querySelectorAll(
+  '.features-header, .feat-card, .step-card, .steps-visual, .req-card, ' +
+  '.pro-plan, .pro-note, .stat-item, ' +
+  '#pro .container > div:first-child, ' +
+  '#steps .section-tag, #steps .section-title, #steps .section-sub, ' +
+  '#requirements .section-tag, #requirements .section-title, ' +
+  '#cta .container'
+);
+revealEls.forEach(el => el.classList.add('reveal'));
+
+// Stagger siblings inside grids
+document.querySelectorAll('.features-grid, .steps-list, .req-content, .pro-grid, .stats-inner').forEach(grid => {
+  [...grid.children].forEach((child, i) => { child.style.transitionDelay = (i * 75) + 'ms'; });
+});
+
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    el.classList.add('visible');
+    revealObserver.unobserve(el);
+    // restore original hover transitions once the reveal finishes
+    el.addEventListener('transitionend', function done() {
+      el.classList.remove('reveal', 'visible');
+      el.style.transitionDelay = '';
+      el.removeEventListener('transitionend', done);
+    }, { once: true });
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+revealEls.forEach(el => revealObserver.observe(el));
 
 const tradtextLink = document.getElementById('tradtext-link');
 if (tradtextLink) {
