@@ -581,6 +581,21 @@ footer strong { color: rgba(255,255,255,0.7); }
   .pro-features { grid-template-columns: 1fr; }
 }
 
+/* ── Twemoji stickers ── */
+img.emoji {
+  height: 1.3em;
+  width: 1.3em;
+  vertical-align: -0.2em;
+  display: inline-block;
+}
+.feat-icon img.emoji,
+.req-icon img.emoji,
+.pro-feat-icon img.emoji {
+  height: 1.6em;
+  width: 1.6em;
+  vertical-align: middle;
+}
+
 /* ══════════════════════════════
    PRO SECTION
 ══════════════════════════════ */
@@ -1299,6 +1314,16 @@ if (tradtextLink) {
     tradtextLink.style.transform = 'none';
   });
 }
+</script>
+
+<!-- Twemoji: reemplaza emojis de texto con stickers SVG consistentes -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/twemoji.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+  twemoji.parse(document.body, {
+    folder: 'svg',
+    ext: '.svg',
+    base: 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/'
+  });
 </script>
 </body>
 </html>
