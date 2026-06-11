@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Términos y Condiciones — DropLink</title>
+<meta name="description" content="Términos y Condiciones de uso de DropLink. Última actualización: junio 2026.">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy: #0c2461;
+  --blue: #1a56db;
+  --white: #ffffff;
+  --gray-50: #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-200: #e2e8f0;
+  --gray-500: #64748b;
+  --gray-700: #374151;
+  --black: #0f172a;
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--white);
+  color: var(--black);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+}
+nav {
+  background: var(--navy);
+  padding: 0 32px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-logo {
+  font-size: 19px;
+  font-weight: 800;
+  text-decoration: none;
+  color: #fff;
+}
+.nav-logo span { color: #38bdf8; }
+.nav-back {
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.15s;
+}
+.nav-back:hover { color: #fff; }
+
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, #1e40af 60%, #1d4ed8 100%);
+  padding: 60px 32px;
+  text-align: center;
+  color: white;
+}
+.hero h1 {
+  font-size: clamp(26px, 4vw, 42px);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: 12px;
+}
+.hero p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.65);
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 32px 80px;
+}
+
+/* Table of contents */
+.toc {
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin-bottom: 48px;
+}
+.toc-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--blue);
+  margin-bottom: 14px;
+}
+.toc ol {
+  padding-left: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 24px;
+}
+.toc li { font-size: 14px; }
+.toc a { color: var(--blue); text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+
+/* Sections */
+.section {
+  margin-bottom: 44px;
+  padding-bottom: 44px;
+  border-bottom: 1px solid var(--gray-200);
+}
+.section:last-child { border-bottom: none; }
+
+.section-num {
+  display: inline-block;
+  background: var(--blue);
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 99px;
+  margin-bottom: 10px;
+}
+.section h2 {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--black);
+  margin-bottom: 14px;
+  scroll-margin-top: 80px;
+}
+.section p {
+  font-size: 15px;
+  color: var(--gray-700);
+  margin-bottom: 12px;
+}
+.section ul, .section ol {
+  padding-left: 22px;
+  margin-bottom: 12px;
+}
+.section li {
+  font-size: 15px;
+  color: var(--gray-700);
+  margin-bottom: 6px;
+}
+.section strong { color: var(--black); }
+
+/* Alert boxes */
+.alert {
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin: 16px 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.alert-warning {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  color: #92400e;
+}
+.alert-info {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1e40af;
+}
+.alert-danger {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+}
+
+footer {
+  background: var(--navy);
+  padding: 32px;
+  text-align: center;
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+}
+footer strong { color: rgba(255,255,255,0.75); }
+footer a { color: #38bdf8; text-decoration: none; }
+
+@media (max-width: 640px) {
+  .container { padding: 40px 20px 60px; }
+  .toc ol { grid-template-columns: 1fr; }
+  nav { padding: 0 16px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">Drop<span>Link</span></a>
+  <a class="nav-back" href="/">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+    Volver al inicio
+  </a>
+</nav>
+
+<div class="hero">
+  <h1>Términos y Condiciones</h1>
+  <p>Última actualización: 11 de junio de 2026 · Versión 1.2</p>
+</div>
+
+<div class="container">
+
+  <div class="alert alert-info">
+    <strong>Importante:</strong> Al descargar, instalar o usar DropLink en cualquiera de sus versiones (Free o Pro), aceptas de forma expresa e íntegra los presentes Términos y Condiciones. Si no estás de acuerdo con alguno de ellos, debes abstenerte de usar el software.
+  </div>
+
+  <!-- Table of contents -->
+  <div class="toc">
+    <div class="toc-title">Índice</div>
+    <ol>
+      <li><a href="#s1">Definiciones</a></li>
+      <li><a href="#s2">Descripción del servicio</a></li>
+      <li><a href="#s3">Licencia de uso</a></li>
+      <li><a href="#s4">Responsabilidad del usuario</a></li>
+      <li><a href="#s5">Contenido y archivos transferidos</a></li>
+      <li><a href="#s6">Transferencias P2P y salas</a></li>
+      <li><a href="#s7">Almacenamiento en nube (Pro)</a></li>
+      <li><a href="#s8">Suscripción Pro y pagos</a></li>
+      <li><a href="#s9">Política de reembolsos</a></li>
+      <li><a href="#s10">Limitación de responsabilidad</a></li>
+      <li><a href="#s11">Exención de garantías</a></li>
+      <li><a href="#s12">Propiedad intelectual</a></li>
+      <li><a href="#s13">Privacidad y datos</a></li>
+      <li><a href="#s14">Suspensión y terminación</a></li>
+      <li><a href="#s15">Modificaciones</a></li>
+      <li><a href="#s16">Legislación aplicable</a></li>
+      <li><a href="#s17">Contacto</a></li>
+    </ol>
+  </div>
+
+  <!-- S1 -->
+  <div class="section" id="s1">
+    <div class="section-num">1</div>
+    <h2>Definiciones</h2>
+    <p>Para los efectos de estos Términos y Condiciones, los siguientes términos tendrán el significado que a continuación se indica:</p>
+    <ul>
+      <li><strong>"DropLink" / "la Aplicación":</strong> Software de escritorio para Windows desarrollado y distribuido por el titular, que permite la transferencia de archivos entre dispositivos mediante red WiFi local, relay P2P y almacenamiento temporal en nube.</li>
+      <li><strong>"Titular":</strong> La persona física o jurídica propietaria y responsable del desarrollo y distribución de DropLink, cuyo correo de contacto es soporte@droplink.mx.</li>
+      <li><strong>"Usuario":</strong> Toda persona que descargue, instale, acceda o utilice DropLink en cualquiera de sus modalidades.</li>
+      <li><strong>"Versión Free":</strong> Modalidad gratuita de la Aplicación, con funciones básicas de transferencia local por WiFi.</li>
+      <li><strong>"Versión Pro" / "DropLink Pro":</strong> Modalidad de pago que otorga acceso a funciones adicionales como compartir por enlace, almacenamiento en nube temporal y personalización de marca.</li>
+      <li><strong>"Servicio de Señal":</strong> Infraestructura en la nube (signal.droplink.mx) que gestiona la coordinación de conexiones P2P, la distribución de archivos en nube y el sistema de licencias.</li>
+      <li><strong>"Contenido del Usuario":</strong> Todos los archivos, textos, imágenes, videos, datos u otro material que el Usuario transfiera, comparta o suba mediante la Aplicación.</li>
+      <li><strong>"Device ID":</strong> Identificador único del dispositivo del Usuario, generado localmente a partir del hardware de la PC, utilizado para vincular la licencia Pro.</li>
+    </ul>
+  </div>
+
+  <!-- S2 -->
+  <div class="section" id="s2">
+    <div class="section-num">2</div>
+    <h2>Descripción del servicio</h2>
+    <p>DropLink es una aplicación de escritorio para Windows que facilita la transferencia de archivos entre una computadora personal y dispositivos móviles u otras computadoras. El servicio se presta en las siguientes modalidades:</p>
+    <ul>
+      <li><strong>Transferencia LAN local:</strong> Comunicación directa entre dispositivos conectados a la misma red WiFi, sin que los archivos salgan de la red local del Usuario.</li>
+      <li><strong>Compartir por enlace (Pro):</strong> Generación de un enlace público temporal que permite a terceros descargar un archivo directamente desde la computadora del Usuario, a través de una conexión relay gestionada por el Servicio de Señal.</li>
+      <li><strong>Almacenamiento en nube 24h (Pro):</strong> Subida de archivos a servidores de almacenamiento temporales con una vigencia máxima de 24 horas, tras la cual el archivo es eliminado automáticamente de forma permanente.</li>
+      <li><strong>Personalización de marca (Pro):</strong> Posibilidad de personalizar la apariencia de la página de descarga pública con logotipos, colores e imágenes propios del Usuario.</li>
+    </ul>
+    <p>El Titular se reserva el derecho de modificar, ampliar, reducir o discontinuar cualquier función del servicio en cualquier momento, con o sin previo aviso.</p>
+  </div>
+
+  <!-- S3 -->
+  <div class="section" id="s3">
+    <div class="section-num">3</div>
+    <h2>Licencia de uso</h2>
+    <p>El Titular otorga al Usuario una licencia personal, no exclusiva, no transferible, revocable y limitada para instalar y usar DropLink en sus dispositivos personales, únicamente para los fines contemplados en estos Términos.</p>
+    <p>Queda expresamente prohibido:</p>
+    <ul>
+      <li>Copiar, modificar, descompilar, realizar ingeniería inversa o distribuir la Aplicación sin autorización expresa del Titular.</li>
+      <li>Usar la Aplicación con fines comerciales sin la autorización correspondiente.</li>
+      <li>Sublicenciar, vender, transferir o ceder la licencia a terceros.</li>
+      <li>Eliminar, alterar u ocultar los avisos de derechos de autor o marcas del Titular.</li>
+      <li>Usar la Aplicación para vulnerar sistemas informáticos de terceros, realizar ataques de red o cualquier actividad ilegal.</li>
+      <li>Intentar eludir, manipular o falsificar el sistema de licencias o el Device ID.</li>
+    </ul>
+  </div>
+
+  <!-- S4 -->
+  <div class="section" id="s4">
+    <div class="section-num">4</div>
+    <h2>Responsabilidad del usuario</h2>
+    <div class="alert alert-warning">
+      <strong>El Usuario es el único y exclusivo responsable de todo uso que haga de la Aplicación y de todo Contenido que transfiera, comparta, suba o ponga a disposición de terceros a través de ella.</strong>
+    </div>
+    <p>El Usuario declara y garantiza que:</p>
+    <ul>
+      <li>Utilizará la Aplicación única y exclusivamente para fines lícitos, conforme a la legislación aplicable en su país de residencia y/o uso.</li>
+      <li>Cuenta con todos los derechos, permisos y autorizaciones necesarios sobre el Contenido que transfiera o comparta mediante la Aplicación.</li>
+      <li>No utilizará la Aplicación para transferir, compartir o distribuir material que infrinja derechos de autor, marcas registradas, patentes u otros derechos de propiedad intelectual de terceros.</li>
+      <li>No usará la Aplicación para distribuir virus, malware, ransomware, spyware, o cualquier otro código malicioso o dañino.</li>
+      <li>No compartirá mediante la Aplicación material ilegal, pornografía infantil, contenido que incite al odio, la violencia o la discriminación, ni ningún otro contenido prohibido por la ley.</li>
+      <li>Es el único responsable de configurar adecuadamente la seguridad de su red WiFi local y de controlar qué dispositivos se conectan a su instancia de DropLink.</li>
+      <li>Comprende que los archivos compartidos mediante enlace público son accesibles por cualquier persona que posea dicho enlace durante el tiempo de vigencia configurado.</li>
+    </ul>
+  </div>
+
+  <!-- S5 -->
+  <div class="section" id="s5">
+    <div class="section-num">5</div>
+    <h2>Contenido y archivos transferidos</h2>
+    <div class="alert alert-danger">
+      <strong>El Titular no revisa, monitorea, controla ni es responsable del Contenido del Usuario.</strong> La Aplicación es una herramienta neutral de transferencia de datos. El Titular se deslinda total y expresamente de cualquier responsabilidad derivada del contenido de los archivos transferidos, compartidos o almacenados por los Usuarios.
+    </div>
+    <p>En particular, el Titular no asume responsabilidad alguna por:</p>
+    <ul>
+      <li>La naturaleza, legalidad, exactitud o veracidad del Contenido del Usuario.</li>
+      <li>Daños causados a terceros como consecuencia del Contenido transferido por el Usuario.</li>
+      <li>Infracciones de derechos de propiedad intelectual cometidas mediante el uso de la Aplicación.</li>
+      <li>Pérdida, corrupción o divulgación no autorizada de archivos durante la transferencia.</li>
+      <li>El acceso no autorizado a archivos compartidos por enlace público cuyo enlace haya sido difundido por el propio Usuario.</li>
+      <li>Archivos de virus, malware u otros códigos dañinos transferidos entre usuarios.</li>
+    </ul>
+    <p>El Usuario acepta indemnizar y mantener indemne al Titular frente a cualquier reclamación, demanda, multa, sanción o gasto (incluidos honorarios legales razonables) que se deriven del Contenido que el Usuario transfiera o comparta mediante la Aplicación.</p>
+  </div>
+
+  <!-- S6 -->
+  <div class="section" id="s6">
+    <div class="section-num">6</div>
+    <h2>Transferencias P2P y salas de conexión</h2>
+    <p>La función de transferencia entre pares (P2P) y las salas de conexión en tiempo real son mecanismos técnicos que facilitan la comunicación directa entre dispositivos. El Titular actúa exclusivamente como intermediario técnico de señalización (coordinación de la conexión) y no como parte de la transferencia de datos en sí.</p>
+    <p>Con respecto a las transferencias P2P, el Titular:</p>
+    <ul>
+      <li>No almacena los archivos transferidos en modo P2P o relay en tiempo real; los datos fluyen directamente entre los dispositivos del emisor y el receptor.</li>
+      <li>No tiene capacidad técnica de inspeccionar el contenido de las transferencias P2P en tiempo real.</li>
+      <li>No se responsabiliza de interrupciones, latencia, pérdida de datos o fallos técnicos durante las transferencias.</li>
+      <li>No garantiza la disponibilidad continua del Servicio de Señal.</li>
+    </ul>
+    <div class="alert alert-warning">
+      <strong>El Titular se deslinda expresamente de cualquier responsabilidad legal, civil o penal</strong> derivada del uso que los Usuarios hagan de las funciones P2P, incluyendo pero no limitado a: distribución de contenido ilegal, violación de propiedad intelectual, transmisión de malware o cualquier actividad que contravenga la legislación vigente.
+    </div>
+  </div>
+
+  <!-- S7 -->
+  <div class="section" id="s7">
+    <div class="section-num">7</div>
+    <h2>Almacenamiento en nube (Pro)</h2>
+    <p>La función de nube de DropLink Pro permite al Usuario subir archivos a servidores de almacenamiento temporal operados por el Titular a través de proveedores de infraestructura en la nube (Cloudflare R2). Respecto a este servicio:</p>
+    <ul>
+      <li><strong>Vigencia máxima:</strong> Los archivos subidos a la nube son eliminados automáticamente tras 24 horas desde su carga, sin posibilidad de recuperación posterior.</li>
+      <li><strong>Cuota de almacenamiento:</strong> Cada usuario Pro cuenta con un límite máximo de 50 GB de almacenamiento activo simultáneo. El Titular puede modificar este límite con previo aviso.</li>
+      <li><strong>Sin respaldo garantizado:</strong> El Titular no realiza copias de seguridad del Contenido del Usuario. El Usuario es el único responsable de mantener copias de sus archivos originales.</li>
+      <li><strong>Acceso por enlace:</strong> Los archivos en nube son accesibles mediante un enlace único. El Usuario es responsable de la distribución y control de dicho enlace.</li>
+      <li><strong>Inspección de contenido:</strong> El Titular se reserva el derecho de revisar y eliminar, sin previo aviso, cualquier contenido que se sospeche viola estos Términos o la legislación vigente, cuando tenga conocimiento efectivo de ello por denuncia de terceros u orden de autoridad competente.</li>
+    </ul>
+    <div class="alert alert-danger">
+      <strong>El Titular no se hace responsable</strong> de los archivos almacenados en la nube por los Usuarios. El Usuario es el único responsable de que el contenido que suba cumpla con la legislación aplicable y no infrinja derechos de terceros.
+    </div>
+  </div>
+
+  <!-- S8 -->
+  <div class="section" id="s8">
+    <div class="section-num">8</div>
+    <h2>Suscripción Pro y pagos</h2>
+    <p>DropLink Pro es una suscripción de pago que otorga acceso a las funciones avanzadas descritas en estos Términos. Los planes disponibles y sus precios se muestran en droplink.mx y pueden ser modificados por el Titular con previo aviso.</p>
+    <p><strong>Modalidad de cobro:</strong> La suscripción Pro se factura de forma recurrente (mensual, trimestral o anual, según el plan elegido) mediante el procesador de pagos Stripe. Al contratar una suscripción, el Usuario autoriza los cobros recurrentes en la tarjeta o método de pago registrado hasta que la suscripción sea cancelada.</p>
+    <p><strong>Activación:</strong> El acceso Pro se activa automáticamente en la Aplicación tras la confirmación del pago por parte de Stripe, sin necesidad de ingresar claves manuales. El Device ID del dispositivo del Usuario se utiliza para vincular la licencia.</p>
+    <p><strong>Cancelación:</strong> El Usuario puede cancelar la renovación automática en cualquier momento desde la propia Aplicación (sección de planes en el launcher). La cancelación no genera reembolso del período en curso; el acceso Pro permanece activo hasta el final del período ya pagado.</p>
+    <p><strong>Upgrades:</strong> Al contratar un plan de mayor nivel, la suscripción anterior se cancela y se inicia la nueva. El Usuario entiende y acepta que no se otorga crédito proporcional por el tiempo restante del plan anterior.</p>
+    <p><strong>Renovación:</strong> Las suscripciones se renuevan automáticamente al finalizar cada período. El Titular notificará los cambios de precio con al menos 30 días de anticipación antes de que surtan efecto en la renovación.</p>
+  </div>
+
+  <!-- S9 -->
+  <div class="section" id="s9">
+    <div class="section-num">9</div>
+    <h2>Política de reembolsos</h2>
+    <div class="alert alert-warning">
+      <strong>Como regla general, todos los pagos realizados por DropLink Pro son definitivos y no reembolsables.</strong>
+    </div>
+    <p>Dado que DropLink Pro otorga acceso inmediato a un servicio digital en el momento del pago, el Usuario renuncia expresamente a cualquier derecho de desistimiento aplicable a la compra de contenido digital, en la medida en que la legislación aplicable lo permita.</p>
+    <p><strong>Única excepción para reembolso:</strong> Se considerará una solicitud de reembolso exclusivamente cuando el Usuario acredite que:</p>
+    <ul>
+      <li>El pago fue procesado correctamente por Stripe (se realizó el cargo a su tarjeta), <strong>Y</strong></li>
+      <li>El acceso Pro no se activó en la Aplicación dentro de las 24 horas siguientes al pago, <strong>Y</strong></li>
+      <li>El Usuario proporcionó el Device ID correcto al momento del pago.</li>
+    </ul>
+    <p>Para solicitar este reembolso excepcional, el Usuario debe contactar a soporte@droplink.mx dentro de los <strong>7 días naturales</strong> siguientes al pago, aportando:</p>
+    <ul>
+      <li>Comprobante de pago de Stripe (recibo o confirmación por email).</li>
+      <li>Captura de pantalla de la Aplicación mostrando el estado "Free" (sin Pro activo).</li>
+      <li>Device ID utilizado al momento del pago.</li>
+      <li>Dirección de email con la que se realizó el pago.</li>
+    </ul>
+    <p>El Titular evaluará cada caso en un plazo máximo de 10 días hábiles. La aprobación o rechazo del reembolso queda a discreción del Titular, quien resolverá de buena fe.</p>
+    <p><strong>No se otorgarán reembolsos por:</strong> insatisfacción con las funciones, cambio de opinión, no uso del servicio, cancelación anticipada, fallo del dispositivo del Usuario, problemas de conectividad en el lado del Usuario, o cualquier otra causa no contemplada en la excepción anterior.</p>
+  </div>
+
+  <!-- S10 -->
+  <div class="section" id="s10">
+    <div class="section-num">10</div>
+    <h2>Limitación de responsabilidad</h2>
+    <div class="alert alert-danger">
+      <strong>En la máxima medida permitida por la legislación aplicable, el Titular no será responsable por ningún daño directo, indirecto, incidental, especial, punitivo, ejemplar o consecuente</strong>, incluyendo, sin limitación: pérdida de datos, pérdida de ingresos, pérdida de beneficios, pérdida de negocio, daño a la reputación, interrupción de actividades, o cualquier otra pérdida intangible, que resulte de:
+    </div>
+    <ul>
+      <li>El uso o la imposibilidad de usar la Aplicación o el Servicio de Señal.</li>
+      <li>Cualquier error, fallo, interrupción, virus, código dañino o inexactitud en la Aplicación.</li>
+      <li>El acceso no autorizado a los datos o dispositivos del Usuario.</li>
+      <li>La conducta de terceros en relación con la Aplicación.</li>
+      <li>El Contenido transferido, compartido o almacenado por el Usuario.</li>
+      <li>La pérdida, corrupción o eliminación de archivos durante la transferencia o en el almacenamiento en nube.</li>
+      <li>La indisponibilidad temporal o permanente del Servicio de Señal o de cualquier función de la Aplicación.</li>
+      <li>Cualquier acción u omisión basada en la confianza del Usuario en la información proporcionada por la Aplicación.</li>
+    </ul>
+    <p>En todo caso, la responsabilidad total y acumulada del Titular frente al Usuario, por cualquier concepto y bajo cualquier teoría legal, no excederá el monto efectivamente pagado por el Usuario al Titular durante los tres (3) meses anteriores al evento que dio origen a la reclamación, o la cantidad de USD $5.00 (cinco dólares americanos), lo que resulte mayor.</p>
+  </div>
+
+  <!-- S11 -->
+  <div class="section" id="s11">
+    <div class="section-num">11</div>
+    <h2>Exención de garantías</h2>
+    <p>La Aplicación y el Servicio de Señal se proporcionan <strong>"tal como están"</strong> y <strong>"según disponibilidad"</strong>, sin garantías de ningún tipo, ya sean expresas, implícitas, legales o de otro tipo.</p>
+    <p>El Titular expresamente niega toda garantía, incluyendo, sin limitación:</p>
+    <ul>
+      <li>Garantías implícitas de comerciabilidad, idoneidad para un propósito particular y no infracción.</li>
+      <li>Que la Aplicación funcionará de forma ininterrumpida, sin errores o libre de virus u otros componentes dañinos.</li>
+      <li>Que los resultados obtenidos del uso de la Aplicación serán exactos, fiables o satisfarán los requisitos del Usuario.</li>
+      <li>Que cualquier error en la Aplicación será corregido.</li>
+      <li>La seguridad e integridad de los datos transmitidos a través de redes WiFi que el Usuario no controle.</li>
+    </ul>
+  </div>
+
+  <!-- S12 -->
+  <div class="section" id="s12">
+    <div class="section-num">12</div>
+    <h2>Propiedad intelectual</h2>
+    <p>Todos los derechos de propiedad intelectual sobre la Aplicación, incluyendo su código fuente, diseño, interfaz, logotipos, nombres comerciales, documentación y demás elementos, son propiedad exclusiva del Titular y están protegidos por las leyes de propiedad intelectual aplicables.</p>
+    <p>Nada en estos Términos constituye una transferencia de derechos de propiedad intelectual al Usuario. La licencia otorgada en estos Términos se limita al uso de la Aplicación en los términos aquí descritos.</p>
+    <p>El Usuario conserva todos los derechos sobre el Contenido que transfiera mediante la Aplicación. Al usar las funciones de nube o de enlace público, el Usuario otorga al Titular una licencia temporal, no exclusiva, para almacenar y servir dicho Contenido únicamente con el fin de prestar el servicio solicitado, durante el tiempo estrictamente necesario para ello.</p>
+  </div>
+
+  <!-- S13 -->
+  <div class="section" id="s13">
+    <div class="section-num">13</div>
+    <h2>Privacidad y datos</h2>
+    <p>DropLink está diseñado con privacidad por defecto. En la modalidad de transferencia local (Free), los archivos nunca salen de la red WiFi local del Usuario y el Titular no tiene acceso a ellos.</p>
+    <p>Los datos que el Titular puede recopilar o procesar incluyen:</p>
+    <ul>
+      <li><strong>Device ID:</strong> Identificador del dispositivo, generado localmente y utilizado para gestionar la licencia Pro. No identifica personalmente al Usuario.</li>
+      <li><strong>Email de pago:</strong> Dirección de correo electrónico proporcionada a Stripe al momento del pago, utilizada para gestión de la licencia y soporte.</li>
+      <li><strong>Datos de uso:</strong> Métricas agregadas y anónimas de uso del Servicio de Señal (número de transferencias, volumen de datos), sin identificación individual.</li>
+      <li><strong>Archivos en nube (Pro):</strong> Almacenados temporalmente en servidores de Cloudflare R2, eliminados automáticamente tras 24 horas.</li>
+    </ul>
+    <p>El Titular no vende, alquila ni comparte datos personales de los Usuarios con terceros, salvo obligación legal o para la prestación del propio servicio (ej. procesador de pagos Stripe).</p>
+    <p>El procesamiento de pagos es gestionado exclusivamente por <strong>Stripe, Inc.</strong>, sujeto a su propia política de privacidad, disponible en stripe.com/privacy.</p>
+  </div>
+
+  <!-- S14 -->
+  <div class="section" id="s14">
+    <div class="section-num">14</div>
+    <h2>Suspensión y terminación</h2>
+    <p>El Titular se reserva el derecho de suspender o terminar el acceso del Usuario a la Aplicación o al Servicio de Señal, con o sin previo aviso, en los siguientes supuestos:</p>
+    <ul>
+      <li>Incumplimiento de cualquier disposición de estos Términos.</li>
+      <li>Uso de la Aplicación para actividades ilegales o que perjudiquen a terceros.</li>
+      <li>Intento de manipulación, elusión o fraude del sistema de licencias.</li>
+      <li>Carga de contenido que viole estos Términos o la legislación vigente.</li>
+      <li>Por requerimiento de autoridad competente.</li>
+    </ul>
+    <p>La terminación no dará derecho al Usuario a reembolso alguno, salvo lo contemplado en la Política de Reembolsos de la Sección 9.</p>
+    <p>El Usuario puede dejar de usar la Aplicación en cualquier momento desinstalándola de su dispositivo. La cancelación de la suscripción Pro debe realizarse desde la Aplicación o contactando a soporte@droplink.mx.</p>
+  </div>
+
+  <!-- S15 -->
+  <div class="section" id="s15">
+    <div class="section-num">15</div>
+    <h2>Modificaciones a los Términos</h2>
+    <p>El Titular se reserva el derecho de modificar estos Términos en cualquier momento. Las modificaciones entrarán en vigor a partir de su publicación en droplink.mx/terminos.</p>
+    <p>Para cambios materiales que afecten los derechos del Usuario (ej. cambios en precios, política de reembolsos o limitaciones de uso), el Titular procurará notificar con al menos 15 días de anticipación mediante un aviso visible en la Aplicación o por correo electrónico, si se dispone del mismo.</p>
+    <p>El uso continuado de la Aplicación tras la publicación de los Términos modificados constituye la aceptación de los mismos. Si el Usuario no acepta los nuevos Términos, debe dejar de usar la Aplicación y, si corresponde, cancelar su suscripción.</p>
+  </div>
+
+  <!-- S16 -->
+  <div class="section" id="s16">
+    <div class="section-num">16</div>
+    <h2>Legislación aplicable y resolución de disputas</h2>
+    <p>Estos Términos se rigen e interpretan de conformidad con las leyes de los <strong>Estados Unidos Mexicanos</strong>, sin perjuicio de los derechos que la legislación local del Usuario pueda otorgarle en su país de residencia.</p>
+    <p>Cualquier disputa, controversia o reclamación que surja de o en relación con estos Términos, la Aplicación o el Servicio, que no pueda resolverse de forma amigable, se someterá a la jurisdicción de los tribunales competentes de la Ciudad de México, México, renunciando las partes a cualquier otro fuero que pudiera corresponderles.</p>
+    <p><strong>Resolución amigable:</strong> Antes de iniciar cualquier procedimiento legal, el Usuario se compromete a contactar al Titular en soporte@droplink.mx para intentar resolver la disputa de forma amigable en un plazo máximo de 30 días naturales.</p>
+    <p><strong>Independencia de cláusulas:</strong> Si alguna disposición de estos Términos fuera declarada nula o inaplicable por un tribunal competente, dicha declaración no afectará la validez del resto de las disposiciones, las cuales continuarán en plena vigencia.</p>
+  </div>
+
+  <!-- S17 -->
+  <div class="section" id="s17">
+    <div class="section-num">17</div>
+    <h2>Contacto</h2>
+    <p>Para cualquier consulta, reclamación o notificación relacionada con estos Términos o con el servicio de DropLink, el Usuario puede contactar al Titular a través de los siguientes medios:</p>
+    <ul>
+      <li><strong>Email de soporte:</strong> soporte@droplink.mx</li>
+      <li><strong>Sitio web:</strong> droplink.mx</li>
+    </ul>
+    <p>El Titular responderá las consultas en un plazo máximo de 5 días hábiles.</p>
+    <div class="alert alert-info">
+      Estos Términos y Condiciones fueron redactados en idioma español. En caso de traducción a otros idiomas, la versión en español prevalecerá sobre cualquier otra versión en caso de discrepancia.
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <strong>DropLink</strong> — Herramienta gratuita de transferencia de archivos local · Sin datos recopilados
+  <br><br>
+  <a href="/">Inicio</a> &nbsp;·&nbsp; <a href="/terminos">Términos y Condiciones</a> &nbsp;·&nbsp; <span>Contacto: soporte@droplink.mx</span>
+</footer>
+
+</body>
+</html>
